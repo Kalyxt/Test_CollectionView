@@ -4,7 +4,8 @@
              x:Class="Test_CollectionView.MainPage"
 			 xmlns:VM="clr-namespace:Test_CollectionView"
              x:DataType="VM:MainPageViewModel"
-             xmlns:Models="clr-namespace:Test_CollectionView.Models">
+             xmlns:Models="clr-namespace:Test_CollectionView.Models"
+             xmlns:behaviors="clr-namespace:Test_CollectionView.Behaviors">
 
 	<CollectionView 
 			x:Name="fro_CollectionView"
@@ -16,55 +17,23 @@
 
 		<CollectionView.ItemTemplate>
 			<DataTemplate x:DataType="Models:StockCard">
-				<SwipeView>
-					<SwipeView.RightItems>
-						<SwipeItems>
-							<SwipeItemView>
-								<!--Delete icon-->
-								<Frame 
-									Grid.Column="0"
-									VerticalOptions="Fill"                   
-									HorizontalOptions="Fill"
-									WidthRequest="88"
-									BackgroundColor="red">
+				
+                <Grid Padding="2"
+                      behaviors:ItemAnimationBehavior.ShouldAnimate="true">
+                
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-									<Grid VerticalOptions="Center" HorizontalOptions="Center">
-										<Grid.RowDefinitions>
-											<RowDefinition Height="*" />
-										</Grid.RowDefinitions>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-										</Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Price}"/>
 
-										<!--Delete-->
-										<Label 
-											Text="D"
-											FontSize="25" 
-											HorizontalOptions="CenterAndExpand"
-											VerticalOptions="CenterAndExpand" />
-									</Grid>
-								</Frame>
-							</SwipeItemView>
-						</SwipeItems>
-					</SwipeView.RightItems>
-
-					<!-- Content of SwipeView-->
-					<Grid Padding="2">
-
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
-
-						<Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
-						<Label Grid.Row="0" Grid.Column="1" Text="{Binding Price}"/>
-
-					</Grid>
-				</SwipeView>
-			</DataTemplate>
+                </Grid>
+            </DataTemplate>
 		</CollectionView.ItemTemplate>
 	</CollectionView>
 </ContentPage>
