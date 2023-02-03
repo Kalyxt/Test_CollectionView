@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,21 +8,14 @@ using System.Threading.Tasks;
 
 namespace Test_CollectionView
 {
-    public class MainPageViewModel
+    public partial class MainPageViewModel
     {
-
-        private int CONST_NumberOfItems = 200;
-
         public MainPageViewModel()
         {
             prp_StockCards = new ObservableCollection<Models.StockCard>();
-
-            for (int i = 0; i < CONST_NumberOfItems; i++)
-            {
-                Models.StockCard tmp_StockCard = new Models.StockCard();
-                prp_StockCards.Add(tmp_StockCard);
-            }
         }
+
+        #region PROPERTIES
 
         private ObservableCollection<Models.StockCard> prp_StockCards;
         public ObservableCollection<Models.StockCard> StockCards
@@ -36,5 +30,27 @@ namespace Test_CollectionView
             }
         }
 
+        #endregion
+
+        #region METHODS
+
+        [RelayCommand]
+        public async Task AddItem()
+        {
+            try
+            {
+                Models.StockCard tmp_StockCard = new Models.StockCard(u_Animate: true);
+                prp_StockCards.Add(tmp_StockCard);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            await Task.Delay(0);
+        }
+
+        #endregion
     }
 }

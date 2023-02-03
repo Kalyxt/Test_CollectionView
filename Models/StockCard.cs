@@ -9,16 +9,18 @@ namespace Test_CollectionView.Models
     public class StockCard
     {
 
-        public StockCard()
+        public StockCard(bool u_Animate = false)
         {
-            Name = RandomString(10);
-            Price = RandomPrice(5);
+            this.Name = RandomString(10);
+            this.Price = RandomPrice(5);
+            this.Animate = u_Animate;
         }
 
         public string Name { get; set; }
 
         public string Price { get; set; }
 
+        public bool Animate { get; set; }
 
         private Random random = new Random();
 

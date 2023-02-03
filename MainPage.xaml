@@ -8,18 +8,27 @@
              xmlns:behaviors="clr-namespace:Test_CollectionView.Behaviors">
 
 	<CollectionView 
-			x:Name="fro_CollectionView"
-			SelectionMode="Single"
-			VerticalOptions="Fill"
-			HorizontalOptions="Fill"
-			MinimumHeightRequest="5"
-			ItemsSource="{Binding StockCards}">
+		x:Name="fro_CollectionView"
+		SelectionMode="Single"
+		VerticalOptions="Fill"
+		HorizontalOptions="Fill"
+		MinimumHeightRequest="5"
+        ItemsUpdatingScrollMode="KeepLastItemInView"
+		ItemsSource="{Binding StockCards}">
 
-		<CollectionView.ItemTemplate>
-			<DataTemplate x:DataType="Models:StockCard">
+        <CollectionView.Header>
+            <Button
+                Text="Add Item"
+                Command="{Binding AddItemCommand}"/>
+
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+			<DataTemplate 
+                x:DataType="Models:StockCard">
 				
                 <Grid Padding="2"
-                      behaviors:ItemAnimationBehavior.ShouldAnimate="true">
+                      behaviors:ItemAnimationBehavior.ShouldAnimate="{Binding Animate}">
                 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

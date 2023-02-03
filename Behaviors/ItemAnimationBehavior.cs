@@ -15,6 +15,11 @@ namespace Test_CollectionView.Behaviors
             defaultValue: false,
             propertyChanged: OnShouldAnimateChanged);
 
+        public bool ShouldAnimate
+        {
+            get { return (bool)GetValue(ShouldAnimateProperty); }
+            set { SetValue(ShouldAnimateProperty, value); }
+        }
         public static void SetShouldAnimate(BindableObject view, VisualElement value) =>
             view.SetValue(ShouldAnimateProperty, value);
 
@@ -31,9 +36,8 @@ namespace Test_CollectionView.Behaviors
         /// </summary>  
         static private async Task Animate(VisualElement elementToAnimate)
         {
-            await elementToAnimate.TranslateTo(-30, 0, 100);
-            await elementToAnimate.TranslateTo(60, 0, 100);
-            await elementToAnimate.TranslateTo(-30, 0, 100);
+            await elementToAnimate.ScaleTo(3, 500);
+            await elementToAnimate.ScaleTo(1, 500);
         }
 
     }
